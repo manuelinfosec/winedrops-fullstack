@@ -14,7 +14,6 @@ export const getSearchResults = async (request, reply) => {
   const { query } = request.query;
   try {
     const searchResults = await searchWines(query);
-    console.log("search term", searchResults);
     return searchResults;
   } catch (err) {
     reply.status(400).send({ error: err.message });

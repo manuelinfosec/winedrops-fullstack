@@ -17,15 +17,22 @@ export const fetchBestSellingWines = async (criteria: string) => {
   // - Only includes orders with statuses 'paid' or 'dispatched'.
   // **Covers Requirement**: Show the best selling wine; Important note about selling the same wine at different prices.
   const query = `
-    SELECT mw.name, mw.vintage,
-           SUM(co.quantity) as total_quantity,
-           SUM(co.total_amount) as total_revenue,
-           COUNT(co.id) as total_orders
-    FROM master_wine mw
-    JOIN wine_product wp ON mw.id = wp.master_wine_id
-    JOIN customer_order co ON wp.id = co.wine_product_id
-    WHERE co.status IN ('paid', 'dispatched')
-    GROUP BY mw.id
+  SELECT mw.name, mw.vintage,
+         SUM(co.quantity) as total_quantity,
+         SUM(co.total_amount) as total_revenue,
+         COUNT(co.id) as total_orders
+  FROM master_wine mw
+  JOIN wine_product wp ON mw.id = wp.master_wine_id
+  JOIN customer_order co ON wp.id = co.wine_product_id
+  WHERE co.status IN ('paid', 'dispatched')
+  GROUP BY mw.id
+  ORDER BY ${
+    criteria === "revenue"
+      ? "total_revenue"
+      : criteria === "quantity"
+      ? "total_quantity"
+      : "total_orders"
+  } DESC
   `;
 
   const rows = await fastify.sqlite.all(query);
@@ -39,18 +46,19 @@ export const fetchBestSellingWines = async (criteria: string) => {
   }));
 
   // Sort the wines based on the selected criteria (e.g., 'revenue', 'quantity', or 'orders') in descending order
-  const sortedWines = [...wines].sort((a, b) => b[criteria] - a[criteria]);
+  // TODO: Move sorting to the data layer
+  // const sortedWines = [...wines].sort((a, b) => b[criteria] - a[criteria]);
 
   // Calculate the index for the top 10% and bottom 10% thresholds.
   // **Covers Requirement**: Top 10% and bottom 10% wines highlighting.
-  const topThresholdIndex = Math.floor(sortedWines.length * 0.1);
-  const bottomThresholdIndex = Math.floor(sortedWines.length * 0.9);
+  const topThresholdIndex = Math.floor(wines.length * 0.1);
+  const bottomThresholdIndex = Math.floor(wines.length * 0.9);
 
   // For each wine, determine if it should be highlighted in green (top 10%) or red (bottom 10%),
   // otherwise no highlight (default).
   return wines.map((wine) => {
-    const isTop10Percent = sortedWines.indexOf(wine) < topThresholdIndex;
-    const isBottom10Percent = sortedWines.indexOf(wine) >= bottomThresholdIndex;
+    const isTop10Percent = wines.indexOf(wine) < topThresholdIndex;
+    const isBottom10Percent = wines.indexOf(wine) >= bottomThresholdIndex;
 
     return {
       ...wine,
