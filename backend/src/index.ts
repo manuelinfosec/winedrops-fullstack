@@ -1,11 +1,12 @@
 import Fastify from "fastify";
-import { registerDatabase } from "./db/database";
+import { registerPlugins } from "./config";
 import { wineRoutes } from "./routes/wineRoutes";
+
 
 const fastify = Fastify({ logger: true });
 
 // Register the database with the Fastify instance
-registerDatabase(fastify);
+registerPlugins(fastify);
 
 // Register routes
 fastify.register(wineRoutes);
@@ -18,7 +19,7 @@ fastify.get("/hello", async () => {
 // Start the server
 (async () => {
   try {
-    await fastify.listen({ port: 3000, host: '0.0.0.0' });
+    await fastify.listen({ port: 3000, host: "0.0.0.0" });
     console.log("Server is listening on http://localhost:3000");
   } catch (err) {
     fastify.log.error(err);
