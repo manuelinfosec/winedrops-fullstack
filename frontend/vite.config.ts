@@ -1,7 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
+// Define config and set NODE_ENV based on the mode
+export default defineConfig(({ mode }) => {
+  process.env.NODE_ENV = mode === "production" ? "production" : "development";
+
+  return {
+    plugins: [react()],
+  };
+});
