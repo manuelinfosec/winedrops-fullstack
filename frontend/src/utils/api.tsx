@@ -5,7 +5,7 @@ export const fetchBestSellingWines = async (
 ): Promise<Wine[]> => {
   try {
     const apiUrl =
-      import.meta.env.NODE_ENV === "production"
+      process.env.NODE_ENV === "production"
         ? import.meta.env.VITE_PRODUCTION_API_URL
         : "http://localhost:3000";
 
