@@ -1,7 +1,15 @@
-console.log("debugggggingg")
-console.log(process.env)
-console.log(process.env.NODE_ENV)
-console.log(process.env.VITE_PRODUCTION_API_URL)
+console.log("debugggggingg");
+
+console.log(import.meta.env); // This should show all available env variables
+console.log(import.meta.env.VITE_PRODUCTION_API_URL);
+console.log(import.meta.env.NODE_ENV);
+
+
+console.log("debugggggingg #2");
+console.log(process.env);
+console.log(process.env.NODE_ENV);
+console.log(process.env.VITE_PRODUCTION_API_URL);
+console.log(process.env.REACT_APP_PRODUCTION_API_URL);
 
 import { useMemo, useState } from "react";
 import "./App.css";
