@@ -7,7 +7,7 @@ export const fetchBestSellingWines = async (
   try {
     const apiUrl =
       process.env.NODE_ENV === "production"
-        ? process.env.REACT_APP_PRODUCTION_API_URL
+        ? process.env.VITE_PRODUCTION_API_URL
         : "http://localhost:3000";
     const response = await fetch(`${apiUrl}/best-selling?criteria=${criteria}`);
     const data = await response.json();
