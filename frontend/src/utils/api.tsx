@@ -9,10 +9,6 @@ export const fetchBestSellingWines = async (
         ? import.meta.env.VITE_PRODUCTION_API_URL
         : "http://localhost:3000";
 
-    console.log("debugggggingg");
-    console.log(process.env);
-    console.log(process.env.NODE_ENV);
-    console.log(process.env.VITE_PRODUCTION_API_URL);
     const response = await fetch(`${apiUrl}/best-selling?criteria=${criteria}`);
     const data = await response.json();
     return data;
