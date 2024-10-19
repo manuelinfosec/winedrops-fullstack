@@ -2,13 +2,13 @@ import React from "react";
 import { Wine } from "../types";
 
 type WineListProps = {
-  wines: Wine[];
+  wines: {idx: number; wine: Wine}[];
 };
 
 const WineList: React.FC<WineListProps> = ({ wines }) => {
   return (
     <ol>
-      {wines.map((wine, idx) => (
+      {wines.map(({ idx, wine }) => (
         <li
           key={wine.name + idx}
           style={{

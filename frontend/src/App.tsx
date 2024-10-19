@@ -43,16 +43,11 @@ function App() {
   };
 
   // Filter wines based on search term
-  const filteredWines = useMemo(
-    () =>
-      wines.filter(
-        (wine) =>
-          !searchTerm ||
-          wine.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          wine.vintage.toString().includes(searchTerm)
-      ),
-    [wines, searchTerm]
-  );
+  const filteredWines = useMemo(() => wines.map((wine, idx) => ({ idx, wine })).filter(({ wine }) =>
+    !searchTerm
+  || wine.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+  || wine.vintage.toString().includes(searchTerm)
+  ), [wines, searchTerm]);
 
   return (
     <main>

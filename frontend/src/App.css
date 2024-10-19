@@ -65,18 +65,6 @@ li {
   border-bottom: 1px solid #ccc;
 }
 
-li:nth-child(1),
-li:nth-child(2) {
-  color: green;
-  font-weight: bold;
-}
-
-li:nth-last-child(1),
-li:nth-last-child(2) {
-  color: red;
-  font-weight: bold;
-}
-
 li {
   font-size: 1.2em;
   padding: 10px;

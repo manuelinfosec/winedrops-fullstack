@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { debounce } from "../utils";
 
 type WineSearchProps = {
   searchTerm: string;
@@ -9,11 +10,20 @@ const WineSearch: React.FC<WineSearchProps> = ({
   searchTerm,
   updateSearchTerm,
 }) => {
+  const [localSearchTerm, setLocalSearchTerm] = useState<string>(searchTerm);
+
+  const debouncedUpdateSearchTerm = useCallback(debounce((term: string) => {
+    updateSearchTerm(term);
+  }, 300), [updateSearchTerm]);
+
   return (
     <input
       type="search"
-      value={searchTerm}
-      onChange={(e) => updateSearchTerm(e.target.value)}
+      value={localSearchTerm}
+      onChange={(e) => {
+        setLocalSearchTerm(e.target.value)
+        debouncedUpdateSearchTerm(e.target.value)
+      }}
       placeholder="Search by name or vintage"
     />
   );
