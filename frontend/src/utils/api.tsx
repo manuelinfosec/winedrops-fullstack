@@ -6,8 +6,8 @@ export const fetchBestSellingWines = async (
 ): Promise<Wine[]> => {
   try {
     const apiUrl =
-      process.env.NODE_ENV === "production"
-        ? process.env.REACT_APP_PRODUCTION_API_URL
+      import.meta.NODE_ENV === "production"
+        ? import.meta.VITE_PRODUCTION_API_URL
         : "http://localhost:3000";
     const response = await fetch(`${apiUrl}/best-selling?criteria=${criteria}`);
     const data = await response.json();
