@@ -28,9 +28,15 @@ function App() {
   // Fetches wine data based on the selected criteria
   const fetchBestSellingWines = async (criteria: Criteria) => {
     try {
+      // Set the API URL based on environment (local or production)
+      const apiUrl =
+        process.env.NODE_ENV === "production"
+          ? process.env.REACT_APP_PRODUCTION_API_URL
+          : "http://localhost:3000";
+
       // Fetch wine data from backend using the selected criteria (revenue, quantity, or orders)
       const response = await fetch(
-        `http://localhost:3000/best-selling?criteria=${criteria}`
+        `${apiUrl}/best-selling?criteria=${criteria}`
       );
       const data = await response.json();
       console.log({ data });
