@@ -10,6 +10,7 @@ export const getBestSellingWines = async (request, reply) => {
   }
 };
 
+// Endpoint not used
 export const getSearchResults = async (request, reply) => {
   const { query } = request.query;
   try {

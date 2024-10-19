@@ -9,6 +9,7 @@ export const registerPlugins = (fastify) => {
   });
 
   fastify.register(cors, {
+    // Allow all origins (not recommended for production)
     origin: true,
     methods: ["GET"],
   });
