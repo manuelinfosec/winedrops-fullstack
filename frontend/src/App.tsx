@@ -1,3 +1,8 @@
+console.log("debugggggingg")
+console.log(process.env)
+console.log(process.env.NODE_ENV)
+console.log(process.env.VITE_PRODUCTION_API_URL)
+
 import { useMemo, useState } from "react";
 import "./App.css";
 import CriteriaSelector from "./components/CriteriaSelector";
