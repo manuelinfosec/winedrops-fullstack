@@ -43,11 +43,21 @@ function App() {
   };
 
   // Filter wines based on search term
-  const filteredWines = useMemo(() => wines.map((wine, idx) => ({ idx, wine })).filter(({ wine }) =>
-    !searchTerm
-  || wine.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-  || wine.vintage.toString().includes(searchTerm)
-  ), [wines, searchTerm]);
+  const filteredWines = useMemo(() => 
+    // Mapping through the wines array to add an index to each wine for easier identification later
+    wines
+      .map((wine, idx) => ({ idx, wine }))
+      // Filtering the wines based on the searchTerm:
+      // 1. If there is no search term (i.e., it's empty), return all wines.
+      // 2. If there is a search term, filter wines by matching the name (case-insensitive) or the vintage.
+      .filter(({ wine }) =>
+        !searchTerm // If searchTerm is empty, no filtering occurs, return true for all wines.
+        || wine.name.toLowerCase().includes(searchTerm.toLowerCase()) // Check if the wine name includes the searchTerm (case-insensitive)
+        || wine.vintage.toString().includes(searchTerm) // Check if the wine vintage matches the searchTerm
+      ), 
+    [wines, searchTerm]
+  );
+  
 
   return (
     <main>

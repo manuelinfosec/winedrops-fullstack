@@ -12,6 +12,7 @@ const WineSearch: React.FC<WineSearchProps> = ({
 }) => {
   const [localSearchTerm, setLocalSearchTerm] = useState<string>(searchTerm);
 
+  // Delay invoking the search by 300 ms
   const debouncedUpdateSearchTerm = useCallback(debounce((term: string) => {
     updateSearchTerm(term);
   }, 300), [updateSearchTerm]);

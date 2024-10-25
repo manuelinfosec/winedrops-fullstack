@@ -18,31 +18,29 @@ div {
 }
 
 label {
-  display: flex; /* Use flexbox to align items */
-  align-items: center; /* Center align vertically */
+  display: flex;
+  align-items: center;
   padding: 10px 20px;
   border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #f0f0f0;
   cursor: pointer;
   margin-right: 10px;
-  transition: background-color 0.2s, box-shadow 0.2s; /* Add transition for smooth effect */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow */
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Hide the default radio button */
 input[type="radio"] {
-  display: none; /* Hide the default radio button */
+  display: none;
 }
 
-input[type="radio"]:checked + label {
-  background-color: #d0e7ff; /* Highlight the selected option */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* More prominent shadow for the selected */
+/* Change background on hover */
+label:hover {
+  background-color: #e0e0e0; 
 }
 
-input[type="radio"] + label:hover {
-  background-color: #e0e0e0; /* Change background on hover */
-}
-
+/* Input styling for search box */
 input[type="search"] {
   width: 100%;
   padding: 10px;
@@ -56,13 +54,6 @@ ol {
   padding: 0;
   margin: 0;
   list-style-type: none;
-}
-
-li {
-  font-size: 1.2em;
-  padding: 10px;
-  margin: 10px 0;
-  border-bottom: 1px solid #ccc;
 }
 
 li {
